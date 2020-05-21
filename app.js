@@ -37,7 +37,7 @@ app.put('/register_doctor', function (req, res) {
     var userReference = firebase.database().ref(referencePath);
     // var userReference2 = firebase.database().ref(referencePath2);
 
-    userReference.update({"doctorId": doctorId, "doctorName": doctorName, "doctorPassword": doctorPassword, "doctorEmail": doctorEmail},
+    userReference.update({"doctorId": doctorId, "doctorName": doctorName, "doctorPassword": doctorPassword, "doctorEmail": doctorEmail, "Role":"doctor"},
         function (error) {
             if (error) {
                 res.json("Data could not be saved.");
@@ -61,7 +61,7 @@ app.put('/register_patient', function (req, res) {
 
     var userReference = firebase.database().ref(referencePath);
     
-    userReference.update({"patientId": patientId, "patientName": patientName, "patientPassword": patientPassword, "patientEmail": patientEmail, "doctorID":doctorID},
+    userReference.update({"patientId": patientId, "patientName": patientName, "patientPassword": patientPassword, "patientEmail": patientEmail, "doctorID":doctorID,"Role":"patient"},
         function (error) {
             if (error) {
                 res.json("Data could not be saved.");
