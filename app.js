@@ -1,3 +1,7 @@
+
+//git push heroku master
+//heroku open
+//https://medium.com/@grantspilsbury/build-and-deploy-a-node-express-server-to-heroku-in-10-steps-70c936ab15dc
 var express = require('express');
 const functions = require('firebase-functions');
 var firebase = require('firebase');
