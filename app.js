@@ -79,7 +79,7 @@ app.get('/login_doctor/:doctorId/:doctorPassword', function (req, res) {
     userReference.on("value",
         function (snapshot) {
             if (snapshot.val().doctorId == req.params.doctorId && snapshot.val().doctorPassword == req.params.doctorPassword) {
-                res.json({"Login":true,"Role":"doctor"});
+                res.json({"Login":true,"doctorId":snapshot.val().doctorId,"doctorName":snapshot.val().doctorName,"doctorEmail":snapshot.val().doctorEmail,"Role":"doctor"});
             } else {
                 res.json({"Login":false,"Role":"doctor"});
             }
@@ -97,7 +97,7 @@ app.get('/login_patient/:patientId/:patientPassword', function (req, res) {
     userReference.on("value",
         function (snapshot) {
             if (snapshot.val().patientId == req.params.patientId && snapshot.val().patientPassword == req.params.patientPassword) {
-                res.json({"Login":true,"Role":"patient"});
+                res.json({"Login":true,"patientId":snapshot.val().patientId,"patientName":snapshot.val().patientName,"patientEmail":snapshot.val().patientEmail,"Role":"doctor"});
             } else {
                 res.json({"Login":false,"Role":"patient"});
             }
