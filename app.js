@@ -91,21 +91,27 @@ app.get('/login_doctor/:doctorId/:doctorPassword', function (req, res) {
 });
 
 app.get('/login_patient/:patientId/:patientPassword', function (req, res) {
-    var userReference = firebase.database().ref("/Users/Patients/" + req.params.patientId);
-
-    //Attach an asynchronous callback to read the data
+    if(req.params.patientId != null || req.params.patientId != ""){
+        var userReference = firebase.database().ref("/Users/Patients/" + req.params.patientId);
+        //Attach an asynchronous callback to read the data
     userReference.on("value",
-        function (snapshot) {
-            if (snapshot.val().patientId == req.params.patientId && snapshot.val().patientPassword == req.params.patientPassword) {
-                res.json({"Login":true,"patientId":snapshot.val().patientId,"patientName":snapshot.val().patientName,"patientEmail":snapshot.val().patientEmail,"Role":"doctor"});
-            } else {
-                res.json({"Login":false,"Role":"patient"});
-            }
-            userReference.off("value");
-        },
-        function (errorObject) {
+    function (snapshot) {
+        if (snapshot.val().patientId == req.params.patientId && snapshot.val().patientPassword == req.params.patientPassword) {
+            res.json({"Login":true,"patientId":snapshot.val().patientId,"patientName":snapshot.val().patientName,"patientEmail":snapshot.val().patientEmail,"Role":"doctor"});
+        } else {
             res.json({"Login":false,"Role":"patient"});
-        });
+        }
+        userReference.off("value");
+    },
+    function (errorObject) {
+        res.json({"Login":false,"Role":"patient"});
+    });
+    }else{
+        res.json({"Login":false,"Role":"patient"});
+    }
+    
+
+    
 });
 
 app.get('/init_game_all/:patientId', function (req, res) {
