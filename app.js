@@ -97,7 +97,7 @@ app.get('/login_patient/:patientId/:patientPassword', function (req, res) {
     userReference.on("value",
     function (snapshot) {
         if (snapshot.val().patientId == req.params.patientId && snapshot.val().patientPassword == req.params.patientPassword) {
-            res.json({"Login":true,"patientId":snapshot.val().patientId,"patientName":snapshot.val().patientName,"patientEmail":snapshot.val().patientEmail,"Role":"doctor"});
+            res.json({"Login":true,"patientId":snapshot.val().patientId,"patientName":snapshot.val().patientName,"patientEmail":snapshot.val().patientEmail,"Role":"patient"});
         } else {
             res.json({"Login":false,"Role":"patient"});
         }
