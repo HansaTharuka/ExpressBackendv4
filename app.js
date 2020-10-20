@@ -222,7 +222,7 @@ app.get('/get_results/:patientId', function (req, res) {
 
 app.get('/get_patients_list/:doctorId', function (req, res) {
     var userReference = firebase.database().ref("/Users/Patients/");
-    var myarrayfinal = [];
+    var myarrayfinal = {};
     userReference.on("value",
         function (snapshot) {
             var values = Object.values(snapshot.val());
